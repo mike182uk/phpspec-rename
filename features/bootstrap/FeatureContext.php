@@ -56,19 +56,19 @@ class FeatureContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Then :arg1 should exist
+     * @Then :_class should exist
      */
-    public function shouldExist($arg1)
+    public function shouldExist($class)
     {
-        throw new PendingException();
+        expect(class_exists($class))->toBe(true);
     }
 
     /**
-     * @Then :arg1 should not exist
+     * @Then :_class should not exist
      */
-    public function shouldNotExist($arg1)
+    public function shouldNotExist($class)
     {
-        throw new PendingException();
+        expect(class_exists($class))->toBe(false);
     }
 
     /**

@@ -23,9 +23,28 @@ class RenameCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $container = $this->getApplication()->getContainer();
+        $container->configure();
+
         $src = $input->getArgument('src');
         $target = $input->getArgument('target');
 
-        var_dump($src, $target);
+        $srcResource = $container->get('locator.resource_manager')->createResource($src);
+        $targetResource = $container->get('locator.resource_manager')->createResource($target);
+
+        $srcPath = $srcResource->getSrcFilename();
+        $targetPath = $targetResource->getSrcFilename();
+        $srcNamespace = $srcResource->getSrcNamespace();
+        $targetNamespace = $targetResource->getSrcNamespace();
+        $srcClassname = $srcResource->getName();
+        $targetClassname = $targetResource->getName();
+
+        $contents = file_get_contents($srcPath);
+        $contents = str_replace($srcNamespace, $targetNamespace, $contents);
+        $contents = str_replace($srcClassname, $targetClassname, $contents);
+
+        file_put_contents($targetPath, $contents);
+
+        unlink($srcPath);
     }
 }
