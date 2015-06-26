@@ -18,7 +18,8 @@
     },
     "autoload-dev": {
       "psr-4": {
-        "Foo\\": "_test/src"
+        "Foo\\": "_test/src",
+        "spec\\Foo\\": "_test/spec"
       }
     }
 }

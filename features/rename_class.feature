@@ -8,3 +8,9 @@ Feature: Rename class
     When I rename "Foo\Bar" to "Foo\Baz"
     Then "Foo\Baz" should exist
     And "Foo\Bar" should not exist
+
+  Scenario: Spec is renamed
+    Given "Foo\Bar" exists
+    When I rename "Foo\Bar" to "Foo\Baz"
+    Then "spec\Foo\BazSpec" should exist
+    And "spec\Foo\BarSpec" should not exist

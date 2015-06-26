@@ -10,7 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class Extension implements ExtensionInterface
 {
     /**
-     * @param ServiceContainer $container
+     * {@inheritdoc}
      */
     public function load(ServiceContainer $container)
     {

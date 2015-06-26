@@ -26,7 +26,17 @@ class ResourceRelocator
      */
     public function relocate(ResourceInterface $oldResource, ResourceInterface $newResource)
     {
-        $content = $this->modifyResourceContent($oldResource, $newResource);
+        $this->relocateSrc($oldResource, $newResource);
+        $this->relocateSpec($oldResource, $newResource);
+    }
+
+    /**
+     * @param ResourceInterface $oldResource
+     * @param ResourceInterface $newResource
+     */
+    private function relocateSrc(ResourceInterface $oldResource, ResourceInterface $newResource)
+    {
+        $content = $this->modifySrcContent($oldResource, $newResource);
 
         $this->filesystem->remove($oldResource->getSrcFilename());
 
@@ -39,14 +49,49 @@ class ResourceRelocator
     /**
      * @param ResourceInterface $oldResource
      * @param ResourceInterface $newResource
+     */
+    private function relocateSpec(ResourceInterface $oldResource, ResourceInterface $newResource)
+    {
+        $content = $this->modifySpecContent($oldResource, $newResource);
+
+        $this->filesystem->remove($oldResource->getSpecFilename());
+
+        $this->filesystem->dumpFile(
+            $newResource->getSpecFilename(),
+            $content
+        );
+    }
+
+    /**
+     * @param ResourceInterface $oldResource
+     * @param ResourceInterface $newResource
      *
      * @return string
      */
-    private function modifyResourceContent(ResourceInterface $oldResource, ResourceInterface $newResource)
+    private function modifySrcContent(ResourceInterface $oldResource, ResourceInterface $newResource)
     {
         $resourceContentModifier = new ResourceContentModifier(
             $oldResource,
             file_get_contents($oldResource->getSrcFilename())
+        );
+
+        $resourceContentModifier->setNamespace($newResource->getSrcNamespace());
+        $resourceContentModifier->setClassName($newResource->getName());
+
+        return $resourceContentModifier->getContent();
+    }
+
+    /**
+     * @param ResourceInterface $oldResource
+     * @param ResourceInterface $newResource
+     *
+     * @return string
+     */
+    private function modifySpecContent(ResourceInterface $oldResource, ResourceInterface $newResource)
+    {
+        $resourceContentModifier = new ResourceContentModifier(
+            $oldResource,
+            file_get_contents($oldResource->getSpecFilename())
         );
 
         $resourceContentModifier->setNamespace($newResource->getSrcNamespace());

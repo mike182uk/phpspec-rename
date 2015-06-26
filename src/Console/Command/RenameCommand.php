@@ -21,6 +21,9 @@ class RenameCommand extends Command
             ->addArgument('target', InputArgument::REQUIRED, 'target class');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getApplication()->getContainer();
