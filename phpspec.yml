@@ -1,0 +1,4 @@
+suites:
+  default:
+    namespace: Mdb\PhpSpecRenameExtension
+    psr4_prefix: Mdb\PhpSpecRenameExtension
