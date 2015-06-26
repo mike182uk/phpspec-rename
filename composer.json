@@ -3,13 +3,13 @@
         "phpspec/phpspec": "~2.2",
         "behat/behat": "~3.0",
         "bossa/phpspec2-expect": "~1.0",
-        "symfony/process": "~2.7",
-        "symfony/filesystem": "~2.7"
+        "symfony/process": "~2.7"
     },
     "config": {
         "bin-dir": "bin"
     },
     "require": {
+        "symfony/filesystem": "~2.7"
     },
     "autoload": {
       "psr-4": {
