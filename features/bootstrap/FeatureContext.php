@@ -44,7 +44,15 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function iRenameTo($srcClass, $targetClass)
     {
-        throw new PendingException();
+        $renameCmd = $this->buildCmd(sprintf('rename %s %s', $srcClass, $targetClass));
+
+        $process = new Process($renameCmd);
+
+        $process->run();
+
+        if ( ! $process->isSuccessful()) {
+            throw new \RuntimeException($process->getErrorOutput());
+        }
     }
 
     /**
