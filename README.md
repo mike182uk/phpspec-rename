@@ -13,8 +13,8 @@ Add this package as a dependency in your `composer.json`.
 
 ```json
 {
-    "require": {
-        "mike182uk/phpspec-rename": "~0.0"
+    "require-dev": {
+        "mike182uk/phpspec-rename": "0.1.*"
     }
 }
 ```
