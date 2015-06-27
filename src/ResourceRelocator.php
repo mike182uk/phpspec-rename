@@ -36,13 +36,10 @@ class ResourceRelocator
      */
     private function relocateSrc(ResourceInterface $oldResource, ResourceInterface $newResource)
     {
-        $content = $this->modifySrcContent($oldResource, $newResource);
-
-        $this->filesystem->remove($oldResource->getSrcFilename());
-
-        $this->filesystem->dumpFile(
+        $this->relocateResource(
+            $oldResource->getSrcFilename(),
             $newResource->getSrcFilename(),
-            $content
+            $this->modifySrcContent($oldResource, $newResource)
         );
     }
 
@@ -52,13 +49,25 @@ class ResourceRelocator
      */
     private function relocateSpec(ResourceInterface $oldResource, ResourceInterface $newResource)
     {
-        $content = $this->modifySpecContent($oldResource, $newResource);
+        $this->relocateResource(
+            $oldResource->getSpecFilename(),
+            $newResource->getSpecFilename(),
+            $this->modifySpecContent($oldResource, $newResource)
+        );
+    }
 
-        $this->filesystem->remove($oldResource->getSpecFilename());
+    /**
+     * @param string $oldFilename
+     * @param string $newFilename
+     * @param string $newContents
+     */
+    private function relocateResource($oldFilename, $newFilename, $newContents)
+    {
+        $this->filesystem->remove($oldFilename);
 
         $this->filesystem->dumpFile(
-            $newResource->getSpecFilename(),
-            $content
+            $newFilename,
+            $newContents
         );
     }
 
@@ -70,15 +79,12 @@ class ResourceRelocator
      */
     private function modifySrcContent(ResourceInterface $oldResource, ResourceInterface $newResource)
     {
-        $resourceContentModifier = new ResourceContentModifier(
+        return $this->modifyResourceContent(
             $oldResource,
-            file_get_contents($oldResource->getSrcFilename())
+            file_get_contents($oldResource->getSrcFilename()),
+            $newResource->getSrcNamespace(),
+            $newResource->getName()
         );
-
-        $resourceContentModifier->setNamespace($newResource->getSrcNamespace());
-        $resourceContentModifier->setClassName($newResource->getName());
-
-        return $resourceContentModifier->getContent();
     }
 
     /**
@@ -89,13 +95,20 @@ class ResourceRelocator
      */
     private function modifySpecContent(ResourceInterface $oldResource, ResourceInterface $newResource)
     {
-        $resourceContentModifier = new ResourceContentModifier(
+        return $this->modifyResourceContent(
             $oldResource,
-            file_get_contents($oldResource->getSpecFilename())
+            file_get_contents($oldResource->getSpecFilename()),
+            $newResource->getSrcNamespace(),
+            $newResource->getName()
         );
+    }
 
-        $resourceContentModifier->setNamespace($newResource->getSrcNamespace());
-        $resourceContentModifier->setClassName($newResource->getName());
+    private function modifyResourceContent(ResourceInterface $oldResource, $content, $newNamespace, $newClassName)
+    {
+        $resourceContentModifier = new ResourceContentModifier($oldResource, $content);
+
+        $resourceContentModifier->setNamespace($newNamespace);
+        $resourceContentModifier->setClassName($newClassName);
 
         return $resourceContentModifier->getContent();
     }
