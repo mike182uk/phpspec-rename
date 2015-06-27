@@ -22,6 +22,7 @@ EOF;
     function let(ResourceInterface $resource)
     {
         $resource->getSrcNamespace()->willReturn('Foo');
+        $resource->getSpecNamespace()->willReturn('spec/Foo');
         $resource->getName()->willReturn('Bar');
 
         $this->beConstructedWith($resource, self::CONTENT);
