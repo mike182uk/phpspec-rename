@@ -98,7 +98,7 @@ class ResourceRelocator
         return $this->modifyResourceContent(
             $oldResource,
             file_get_contents($oldResource->getSpecFilename()),
-            $newResource->getSrcNamespace(),
+            $newResource->getSpecNamespace(),
             $newResource->getName()
         );
     }

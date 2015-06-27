@@ -40,8 +40,11 @@ class ResourceContentModifier
     public function setNamespace($namespace)
     {
         $this->content = preg_replace(
-            sprintf('/%s/', $this->resource->getSrcNamespace()),
-            $namespace,
+            sprintf('/namespace (%s|%s)/',
+                preg_quote($this->resource->getSrcNamespace(), '/'),
+                preg_quote($this->resource->getSpecNamespace(), '/')
+            ),
+            sprintf('namespace %s', $namespace),
             $this->content
         );
     }
@@ -52,8 +55,8 @@ class ResourceContentModifier
     public function setClassName($className)
     {
         $this->content = preg_replace(
-            sprintf('/%s/', $this->resource->getName()),
-            $className,
+            sprintf('/class %s/', $this->resource->getName()),
+            sprintf('class %s', $className),
             $this->content
         );
     }
