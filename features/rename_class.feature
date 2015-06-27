@@ -3,14 +3,22 @@ Feature: Rename class
   As a developer
   I want to be able to rename a class and its corresponding spec with PHPSpec
 
-  Scenario: Class is renamed
-    Given "Foo\Bar" exists
-    When I rename "Foo\Bar" to "Foo\Baz"
-    Then "Foo\Baz" should exist
-    And "Foo\Bar" should not exist
+  Scenario Outline: Class is renamed
+    Given "<src>" exists
+    When I rename "<src>" to "<target>"
+    Then "<target>" should exist
+    And "<src>" should not exist
 
-  Scenario: Spec is renamed
-    Given "Foo\Bar" exists
-    When I rename "Foo\Bar" to "Foo\Baz"
-    Then "spec\Foo\BazSpec" should exist
-    And "spec\Foo\BarSpec" should not exist
+    Examples:
+      | src     | target  |
+      | Foo\Bar | Foo\Baz |
+
+  Scenario Outline: Spec is renamed
+    Given "<src>" exists
+    When I rename "<src>" to "<target>"
+    Then "<targetSpec>" should exist
+    And "<srcSpec>" should not exist
+
+    Examples:
+      | src     | target  | srcSpec          | targetSpec       |
+      | Foo\Bar | Foo\Baz | spec\Foo\BarSpec | spec\Foo\BazSpec |
