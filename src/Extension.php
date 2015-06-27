@@ -14,7 +14,7 @@ class Extension implements ExtensionInterface
      */
     public function load(ServiceContainer $container)
     {
-        $container->setShared('locator.resource_relocator', function($c) {
+        $container->setShared('locator.resource_relocator', function ($c) {
             return new ResourceRelocator(
                 new Filesystem()
             );

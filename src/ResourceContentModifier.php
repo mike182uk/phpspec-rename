@@ -18,7 +18,7 @@ class ResourceContentModifier
 
     /**
      * @param ResourceInterface $resource
-     * @param string $content
+     * @param string            $content
      */
     public function __construct(ResourceInterface $resource, $content)
     {

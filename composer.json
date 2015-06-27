@@ -3,7 +3,8 @@
         "phpspec/phpspec": "~2.2",
         "behat/behat": "~3.0",
         "bossa/phpspec2-expect": "~1.0",
-        "symfony/process": "~2.7"
+        "symfony/process": "~2.7",
+        "fabpot/php-cs-fixer": "~1.9"
     },
     "config": {
         "bin-dir": "bin"

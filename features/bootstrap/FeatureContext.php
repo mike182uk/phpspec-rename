@@ -2,7 +2,6 @@
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Behat\Tester\Exception\PendingException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
@@ -42,7 +41,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
         $process->setInput('Y');
         $process->run();
 
-        if ( ! $process->isSuccessful()) {
+        if (!$process->isSuccessful()) {
             throw new \RuntimeException($process->getErrorOutput());
         }
     }
@@ -58,7 +57,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
 
         $process->run();
 
-        if ( ! $process->isSuccessful()) {
+        if (!$process->isSuccessful()) {
             throw new \RuntimeException($process->getErrorOutput());
         }
     }
