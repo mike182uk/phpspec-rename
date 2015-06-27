@@ -1,16 +1,26 @@
 {
+    "name": "mike182uk/phpspec-rename",
+    "type": "library",
+    "description": "PHPSpec rename extension - Use PHPSpec to rename a class and its corresponding spec",
+    "keywords": ["phpspec", "refactor", "rename"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael David Barrett",
+            "email": "mike182uk@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/mike182uk/phpspec-rename",
+    "require": {
+        "symfony/filesystem": "~2.7",
+        "phpspec/phpspec": "~2.2"
+    },
     "require-dev": {
         "phpspec/phpspec": "~2.2",
         "behat/behat": "~3.0",
         "bossa/phpspec2-expect": "~1.0",
         "symfony/process": "~2.7",
         "fabpot/php-cs-fixer": "~1.9"
-    },
-    "config": {
-        "bin-dir": "bin"
-    },
-    "require": {
-        "symfony/filesystem": "~2.7"
     },
     "autoload": {
       "psr-4": {
@@ -22,5 +32,8 @@
         "Foo\\": "_test/src",
         "spec\\Foo\\": "_test/spec"
       }
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }
