@@ -103,6 +103,14 @@ class ResourceRelocator
         );
     }
 
+    /**
+     * @param ResourceInterface $oldResource
+     * @param string            $content
+     * @param string            $newNamespace
+     * @param string            $newClassName
+     *
+     * @return string
+     */
     private function modifyResourceContent(ResourceInterface $oldResource, $content, $newNamespace, $newClassName)
     {
         $resourceContentModifier = new ResourceContentModifier($oldResource, $content);
