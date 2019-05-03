@@ -1,4 +1,6 @@
-#PHPSpec Rename
+#### ⚠️ This project is no longer maintained
+
+# PHPSpec Rename
 
 [![Build Status](https://img.shields.io/travis/mike182uk/phpspec-rename.svg?style=flat-square)](http://travis-ci.org/mike182uk/phpspec-rename)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/mike182uk/phpspec-rename.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/phpspec-rename/)
@@ -8,7 +10,7 @@
 
 Use PHPSpec to rename a class and its corresponding spec.
 
-##Installation
+## Installation
 
 Add this package as a dependency in your `composer.json`.
 
@@ -27,7 +29,7 @@ extensions:
   - Mdb\PhpSpecRenameExtension\Extension
 ```
 
-##Usage
+## Usage
 
 ```bash
 bin/phpspec rename Foo/Bar Foo/Bar/Baz
